@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Harbour city illustration</title>
+  <desc id="desc">Warm-toned harbour skyline with bridge, water, and ferry.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffd9a3" />
+      <stop offset="100%" stop-color="#ffc18f" />
+    </linearGradient>
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7bb7c9" />
+      <stop offset="100%" stop-color="#2c6984" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)" />
+  <circle cx="920" cy="170" r="72" fill="#fff0c2" />
+  <rect y="520" width="1200" height="380" fill="url(#water)" />
+  <path d="M0 510 C190 430 290 470 460 420 C620 374 840 430 1200 340 L1200 620 L0 620 Z" fill="#d98752" opacity="0.55" />
+  <path d="M120 530 Q370 260 680 530" fill="none" stroke="#20384a" stroke-width="24" stroke-linecap="round" />
+  <path d="M180 530 L180 640 M260 470 L260 640 M340 420 L340 640 M420 390 L420 640 M500 410 L500 640 M580 470 L580 640 M660 530 L660 640" stroke="#20384a" stroke-width="14" />
+  <rect x="760" y="310" width="90" height="210" rx="6" fill="#314b5f" />
+  <rect x="860" y="250" width="120" height="270" rx="6" fill="#42647d" />
+  <rect x="1000" y="360" width="80" height="160" rx="6" fill="#2f4456" />
+  <rect x="790" y="340" width="20" height="20" fill="#d8eef7" />
+  <rect x="825" y="340" width="20" height="20" fill="#d8eef7" />
+  <rect x="890" y="280" width="24" height="24" fill="#d8eef7" />
+  <rect x="926" y="280" width="24" height="24" fill="#d8eef7" />
+  <rect x="962" y="280" width="24" height="24" fill="#d8eef7" />
+  <path d="M760 710 C860 665 980 665 1080 710 L1080 760 L760 760 Z" fill="#f7f3ee" />
+  <rect x="870" y="662" width="110" height="28" rx="14" fill="#f7f3ee" />
+  <path d="M110 700 C200 670 300 678 390 700 L390 735 L110 735 Z" fill="#ffffff" opacity="0.95" />
+  <path d="M135 692 L184 645 L340 645 L366 692 Z" fill="#df6c46" />
+  <rect x="182" y="692" width="104" height="25" fill="#24485b" />
+</svg>

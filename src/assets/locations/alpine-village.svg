@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Alpine village illustration</title>
+  <desc id="desc">Mountain village with pine trees, cabins, and snowy peaks.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#dff1ff" />
+      <stop offset="100%" stop-color="#f7fbff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)" />
+  <path d="M0 510 L210 250 L430 510 Z" fill="#9eb4c3" />
+  <path d="M170 510 L410 160 L700 510 Z" fill="#7b93a6" />
+  <path d="M470 510 L760 120 L1060 510 Z" fill="#8fa3b5" />
+  <path d="M780 510 L980 240 L1200 510 Z" fill="#b7c8d4" />
+  <path d="M135 380 L210 250 L300 380 Z" fill="#ffffff" opacity="0.9" />
+  <path d="M320 290 L410 160 L510 290 Z" fill="#ffffff" opacity="0.95" />
+  <path d="M620 245 L760 120 L860 245 Z" fill="#ffffff" opacity="0.95" />
+  <rect y="510" width="1200" height="390" fill="#dde6d9" />
+  <rect y="650" width="1200" height="250" fill="#bdd1ba" />
+  <g fill="#355b46">
+    <path d="M120 635 L160 560 L200 635 Z" />
+    <rect x="154" y="635" width="12" height="38" />
+    <path d="M990 645 L1040 550 L1090 645 Z" />
+    <rect x="1035" y="645" width="12" height="40" />
+    <path d="M1080 620 L1110 565 L1140 620 Z" />
+    <rect x="1106" y="620" width="8" height="34" />
+  </g>
+  <g>
+    <rect x="290" y="540" width="205" height="130" rx="10" fill="#8c5d43" />
+    <path d="M260 545 L392 455 L525 545 Z" fill="#593c2c" />
+    <rect x="340" y="592" width="42" height="78" fill="#f1ddc5" />
+    <rect x="410" y="585" width="36" height="32" fill="#f4e9d6" />
+    <rect x="780" y="565" width="175" height="110" rx="10" fill="#99664a" />
+    <path d="M748 570 L867 490 L988 570 Z" fill="#644634" />
+    <rect x="820" y="618" width="38" height="57" fill="#f1ddc5" />
+    <rect x="880" y="605" width="34" height="28" fill="#f4e9d6" />
+  </g>
+  <path d="M100 715 C320 670 520 670 760 715 C930 748 1060 735 1200 700" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" opacity="0.8" />
+</svg>
