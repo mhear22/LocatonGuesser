@@ -1,14 +1,18 @@
-import alpineVillage from '../assets/locations/alpine-village.svg'
-import desertHighway from '../assets/locations/desert-highway.svg'
-import harbourCity from '../assets/locations/harbour-city.svg'
+import image1000017978 from '../assets/locations/1000017978.jpg'
+import image1000018088 from '../assets/locations/1000018088.jpg'
+import image1000018236 from '../assets/locations/1000018236.jpg'
+import image1000018283 from '../assets/locations/1000018283.jpg'
+import image1000018304 from '../assets/locations/1000018304.jpg'
+import image20260303 from '../assets/locations/img_20260303_092304864.jpg'
+import image20260311 from '../assets/locations/img_20260311_141506164.jpg'
 
 export type LocationEntry = {
   id: string
   title: string
   image: string
   alt: string
-  latitude: number
-  longitude: number
+  latitude: number | null
+  longitude: number | null
 }
 
 function assertCoordinateRange(
@@ -26,34 +30,75 @@ function assertCoordinateRange(
 }
 
 function defineLocation(entry: LocationEntry): LocationEntry {
-  assertCoordinateRange('latitude', entry.latitude, -90, 90, entry.id)
-  assertCoordinateRange('longitude', entry.longitude, -180, 180, entry.id)
+  if ((entry.latitude === null) !== (entry.longitude === null)) {
+    throw new Error(
+      `Invalid coordinates for "${entry.id}". Latitude and longitude must both be provided or both be null.`,
+    )
+  }
+
+  if (entry.latitude !== null && entry.longitude !== null) {
+    assertCoordinateRange('latitude', entry.latitude, -90, 90, entry.id)
+    assertCoordinateRange('longitude', entry.longitude, -180, 180, entry.id)
+  }
+
   return entry
 }
 
 export const locations: LocationEntry[] = [
   defineLocation({
-    id: 'harbour-view',
-    title: 'Sydney Harbour Guess',
-    image: harbourCity,
-    alt: 'Illustrated harbour skyline with a bridge, ferry, and waterside buildings',
-    latitude: -33.8568,
-    longitude: 151.2153,
+    id: '2026-03-11-162203-1000017978',
+    title: '11 Mar 2026, 4:22 pm',
+    image: image1000017978,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.714528,
+    longitude: 139.773417,
   }),
   defineLocation({
-    id: 'alpine-village',
-    title: 'Swiss Village Guess',
-    image: alpineVillage,
-    alt: 'Illustrated mountain village with chalets beneath snow peaks',
-    latitude: 46.6863,
-    longitude: 7.8632,
+    id: '2026-03-11-162207-img-20260303-092304864',
+    title: '11 Mar 2026, 4:22 pm',
+    image: image20260303,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.62725,
+    longitude: 139.77425,
   }),
   defineLocation({
-    id: 'desert-highway',
-    title: 'Arizona Desert Guess',
-    image: desertHighway,
-    alt: 'Illustrated desert road with cactus plants and layered mesas',
-    latitude: 36.0544,
-    longitude: -112.1401,
+    id: '2026-03-11-162158-1000018088',
+    title: '11 Mar 2026, 4:21 pm',
+    image: image1000018088,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.580972,
+    longitude: 138.44875,
+  }),
+  defineLocation({
+    id: '2026-03-11-162154-1000018236',
+    title: '11 Mar 2026, 4:21 pm',
+    image: image1000018236,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.714194,
+    longitude: 139.803389,
+  }),
+  defineLocation({
+    id: '2026-03-11-162149-1000018283',
+    title: '11 Mar 2026, 4:21 pm',
+    image: image1000018283,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.710038,
+    longitude: 139.810713,
+  }),
+  defineLocation({
+    id: '2026-03-11-162144-img-20260311-141506164',
+    title: '11 Mar 2026, 4:21 pm',
+    image: image20260311,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.061944,
+    longitude: 138.885667,
+  }),
+  defineLocation({
+    id: '2026-03-11-162138-1000018304',
+    title: '11 Mar 2026, 4:21 pm',
+    image: image1000018304,
+    alt: 'Location reference photo captured on 11 March 2026',
+    latitude: 35.239056,
+    longitude: 139.129333,
   }),
 ]

@@ -64,9 +64,11 @@ type LocationEntry = {
   title: string
   image: string
   alt: string
-  latitude: number
-  longitude: number
+  latitude: number | null
+  longitude: number | null
 }
 ```
+
+Set both coordinates to `null` if you have not guessed the location yet. The UI will render a placeholder panel instead of a map until both values are filled in.
 
 The data module validates latitude and longitude values during development and build time so obviously invalid coordinates fail early.
