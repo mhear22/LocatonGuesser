@@ -1,15 +1,32 @@
 :root {
   font-family: "Instrument Sans", "Avenir Next", "Segoe UI", sans-serif;
-  color: #1f2933;
-  background:
-    radial-gradient(circle at top left, rgba(236, 179, 67, 0.28), transparent 28%),
-    linear-gradient(180deg, #f4efe7 0%, #fbfaf7 45%, #eef3f1 100%);
+  color: #e8edf2;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+  --page-foreground: #e8edf2;
+  --page-background:
+    radial-gradient(circle at 15% 18%, rgba(255, 181, 72, 0.34), transparent 20%),
+    radial-gradient(circle at 82% 22%, rgba(62, 146, 204, 0.26), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(15, 85, 128, 0.22), transparent 34%),
+    linear-gradient(180deg, #040b11 0%, #09131b 34%, #10202a 68%, #132733 100%);
+  --page-overlay:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  --hero-title: #f6f8fb;
+  --accent: #f0b35c;
+  --card-background: rgba(8, 19, 27, 0.8);
+  --card-border: rgba(232, 237, 242, 0.12);
+  --card-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+  --panel-border: rgba(232, 237, 242, 0.1);
+  --copy-muted: #b7c4cf;
+  --copy-subtle: #98abb8;
+  --empty-background:
+    linear-gradient(135deg, rgba(240, 179, 92, 0.22), rgba(53, 117, 172, 0.18));
 }
 
 * {
@@ -18,11 +35,25 @@
 
 html {
   scroll-behavior: smooth;
+  background: #040b11;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  color: var(--page-foreground);
+  background: var(--page-background);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--page-overlay);
+  background-size: 72px 72px;
+  opacity: 0.22;
+  pointer-events: none;
 }
 
 img {
@@ -42,6 +73,8 @@ select {
 }
 
 .page-shell {
+  position: relative;
+  z-index: 1;
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 3rem 0 4rem;
@@ -57,7 +90,7 @@ select {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 0.78rem;
-  color: #9a5d00;
+  color: var(--accent);
 }
 
 .hero h1 {
@@ -65,14 +98,14 @@ select {
   font-size: clamp(2.8rem, 7vw, 5.6rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
-  color: #10232f;
+  color: var(--hero-title);
 }
 
 .hero-copy {
   margin: 1.5rem 0 0;
   max-width: 40rem;
   font-size: 1.05rem;
-  color: #425466;
+  color: var(--copy-muted);
 }
 
 .locations {
@@ -86,11 +119,15 @@ select {
   gap: 0;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid rgba(16, 35, 47, 0.08);
+  border: 1px solid var(--card-border);
   border-radius: 1.6rem;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 22px 70px rgba(16, 35, 47, 0.08);
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
   backdrop-filter: blur(16px);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .media-panel,
@@ -110,7 +147,7 @@ select {
 .map-panel {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  border-left: 1px solid rgba(16, 35, 47, 0.08);
+  border-left: 1px solid var(--panel-border);
 }
 
 .map-header {
@@ -122,24 +159,24 @@ select {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.72rem;
-  color: #9a5d00;
+  color: var(--accent);
 }
 
 .map-header h2 {
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.2rem);
   line-height: 1.05;
-  color: #10232f;
+  color: var(--hero-title);
 }
 
 .coordinates {
   margin: 0.7rem 0 0;
-  color: #5b6b79;
+  color: var(--copy-subtle);
   font-size: 0.95rem;
 }
 
 .pending-copy {
-  color: #9a5d00;
+  color: var(--accent);
 }
 
 .map-frame {
@@ -156,9 +193,8 @@ select {
   min-height: 20rem;
   padding: 1.5rem;
   text-align: center;
-  background:
-    linear-gradient(135deg, rgba(236, 179, 67, 0.15), rgba(16, 35, 47, 0.06));
-  color: #10232f;
+  background: var(--empty-background);
+  color: var(--hero-title);
 }
 
 .map-empty-state p {
@@ -169,7 +205,7 @@ select {
 
 .map-empty-state span {
   max-width: 18rem;
-  color: #425466;
+  color: var(--copy-muted);
 }
 
 .map-empty-state code {
@@ -198,7 +234,7 @@ select {
 
   .map-panel {
     border-left: 0;
-    border-top: 1px solid rgba(16, 35, 47, 0.08);
+    border-top: 1px solid var(--panel-border);
   }
 
   .location-image {
