@@ -25,6 +25,7 @@
   --panel-border: rgba(232, 237, 242, 0.1);
   --copy-muted: #b7c4cf;
   --copy-subtle: #98abb8;
+  --summary-background: rgba(8, 19, 27, 0.72);
   --empty-background:
     linear-gradient(135deg, rgba(240, 179, 92, 0.22), rgba(53, 117, 172, 0.18));
 }
@@ -109,6 +110,46 @@ select {
 }
 
 .locations {
+  display: grid;
+  gap: 2rem;
+}
+
+.archive-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.archive-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.3rem 1.5rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--hero-title);
+  border: 1px solid var(--card-border);
+  border-radius: 1.6rem;
+  background: var(--summary-background);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(16px);
+}
+
+.archive-summary::-webkit-details-marker {
+  display: none;
+}
+
+.archive-summary span:first-child {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.archive-summary-copy {
+  color: var(--copy-subtle);
+  font-size: 0.95rem;
+}
+
+.archive-list {
   display: grid;
   gap: 2rem;
 }
@@ -221,6 +262,15 @@ select {
 
   .hero {
     padding-bottom: 2rem;
+  }
+
+  .archive-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .archive-list {
+    gap: 1.5rem;
   }
 
   .location-card {
