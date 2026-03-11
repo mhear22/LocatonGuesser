@@ -3,15 +3,51 @@ import { locations } from './data/locations'
 
 const mapZoom = 12
 
+function formatCoordinatePair(latitude: number | null, longitude: number | null) {
+  if (latitude === null || longitude === null) {
+    return ''
+  }
+
+  return `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
+}
+
 function createGoogleMapsEmbedUrl(latitude: number, longitude: number) {
   const query = encodeURIComponent(`${latitude},${longitude}`)
   return `https://www.google.com/maps?q=${query}&z=${mapZoom}&output=embed`
 }
 
-const displayLocations = locations.map((location) => {
+function escapeCsvValue(value: string) {
+  return `"${value.replace(/"/g, '""')}"`
+}
+
+function downloadCsv() {
+  const header = ['Filename', 'Index Number', 'Geo Location', 'Actual Geo Location']
+  const rows = locations.map((location, index) => [
+    location.filename,
+    String(index + 1),
+    formatCoordinatePair(location.latitude, location.longitude),
+    formatCoordinatePair(location.actualLatitude, location.actualLongitude),
+  ])
+  const csvContent = [header, ...rows]
+    .map((row) => row.map(escapeCsvValue).join(','))
+    .join('\n')
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const objectUrl = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+
+  link.href = objectUrl
+  link.download = 'location-guesses.csv'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(objectUrl)
+}
+
+const displayLocations = locations.map((location, index) => {
   if (location.latitude === null || location.longitude === null) {
     return {
       ...location,
+      referenceNumber: index + 1,
       coordinatesLabel: 'Add guessed coordinates in the data file.',
       mapUrl: null,
     }
@@ -19,6 +55,7 @@ const displayLocations = locations.map((location) => {
 
   return {
     ...location,
+    referenceNumber: index + 1,
     coordinatesLabel: `${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}`,
     mapUrl: createGoogleMapsEmbedUrl(location.latitude, location.longitude),
   }
@@ -51,7 +88,10 @@ const archivedLocations = displayLocations.filter((location) => location.group =
 
         <div class="map-panel">
           <div class="map-header">
-            <p class="map-label">Location Guess</p>
+            <div class="map-label-row">
+              <p class="map-label">Location Guess</p>
+              <span class="location-number">#{{ location.referenceNumber }}</span>
+            </div>
             <h2>{{ location.title }}</h2>
             <p
               class="coordinates"
@@ -103,7 +143,10 @@ const archivedLocations = displayLocations.filter((location) => location.group =
 
             <div class="map-panel">
               <div class="map-header">
-                <p class="map-label">Location Guess</p>
+                <div class="map-label-row">
+                  <p class="map-label">Location Guess</p>
+                  <span class="location-number">#{{ location.referenceNumber }}</span>
+                </div>
                 <h2>{{ location.title }}</h2>
                 <p
                   class="coordinates"
@@ -133,6 +176,16 @@ const archivedLocations = displayLocations.filter((location) => location.group =
           </article>
         </div>
       </details>
+
+      <div class="export-actions">
+        <button
+          class="export-button"
+          type="button"
+          @click="downloadCsv"
+        >
+          Download CSV
+        </button>
+      </div>
     </main>
   </div>
 </template>

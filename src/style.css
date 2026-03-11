@@ -114,6 +114,39 @@ select {
   gap: 2rem;
 }
 
+.export-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.export-button {
+  border: 1px solid rgba(240, 179, 92, 0.38);
+  border-radius: 999px;
+  padding: 0.9rem 1.35rem;
+  background:
+    linear-gradient(135deg, rgba(240, 179, 92, 0.22), rgba(53, 117, 172, 0.2)),
+    rgba(8, 19, 27, 0.88);
+  color: var(--hero-title);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.export-button:hover,
+.export-button:focus-visible {
+  border-color: rgba(240, 179, 92, 0.72);
+  transform: translateY(-1px);
+}
+
+.export-button:focus-visible {
+  outline: 2px solid rgba(240, 179, 92, 0.5);
+  outline-offset: 3px;
+}
+
 .archive-panel {
   display: grid;
   gap: 1rem;
@@ -195,12 +228,34 @@ select {
   padding: 1.3rem 1.3rem 1rem;
 }
 
+.map-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
 .map-label {
   margin: 0 0 0.35rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.72rem;
   color: var(--accent);
+}
+
+.location-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgba(240, 179, 92, 0.28);
+  border-radius: 999px;
+  background: rgba(240, 179, 92, 0.12);
+  color: var(--hero-title);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 .map-header h2 {
