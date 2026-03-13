@@ -61,7 +61,9 @@ const displayLocations = locations.map((location, index) => {
   }
 })
 
-const latestLocations = displayLocations.filter((location) => location.group === 'latest')
+const latestLocations = displayLocations
+  .filter((location) => location.group === 'latest')
+  .sort((left, right) => right.referenceNumber - left.referenceNumber)
 const archivedLocations = displayLocations.filter((location) => location.group === 'archive')
 </script>
 

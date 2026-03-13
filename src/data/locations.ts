@@ -8,6 +8,10 @@ import image20260310_185012899 from '../assets/locations/IMG_20260310_185012899.
 import image20260311_092734000 from '../assets/locations/IMG_20260311_092734000.jpg'
 import image20260311_142738676 from '../assets/locations/IMG_20260311_142738676.jpg'
 import image20260311_145538432 from '../assets/locations/IMG_20260311_145538432.jpg'
+import image20260312_090025626 from '../assets/locations/IMG_20260312_090025626.jpg'
+import image20260312_113501214 from '../assets/locations/IMG_20260312_113501214.jpg'
+import image20260313_105912933 from '../assets/locations/IMG_20260313_105912933.jpg'
+import image20260313_111039650 from '../assets/locations/IMG_20260313_111039650.jpg'
 import image20260303 from '../assets/locations/img_20260303_092304864.jpg'
 import image20260311 from '../assets/locations/img_20260311_141506164.jpg'
 
@@ -122,6 +126,54 @@ export const locations: LocationEntry[] = [
     alt: 'Location reference photo captured on 11 March 2026',
     latitude: 34.69448814054522,
     longitude: 135.5023475534112,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-12-090025-img-20260312-090025626',
+    group: 'latest',
+    title: '12 Mar 2026, 9:00 am',
+    filename: 'IMG_20260312_090025626.jpg',
+    image: image20260312_090025626,
+    alt: 'Location reference photo captured on 12 March 2026',
+    latitude: 32.74168514169738,
+    longitude: 129.872318966023,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-12-113501-img-20260312-113501214',
+    group: 'latest',
+    title: '12 Mar 2026, 11:35 am',
+    filename: 'IMG_20260312_113501214.jpg',
+    image: image20260312_113501214,
+    alt: 'Location reference photo captured on 12 March 2026',
+    latitude: 32.7768648830334, 
+    longitude: 129.86393415894932,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-13-105912-img-20260313-105912933',
+    group: 'latest',
+    title: '13 Mar 2026, 10:59 am',
+    filename: 'IMG_20260313_105912933.jpg',
+    image: image20260313_105912933,
+    alt: 'Location reference photo captured on 13 March 2026',
+    latitude: 32.77343859550882,
+    longitude: 129.86330300142296,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-13-111039-img-20260313-111039650',
+    group: 'latest',
+    title: '13 Mar 2026, 11:10 am',
+    filename: 'IMG_20260313_111039650.jpg',
+    image: image20260313_111039650,
+    alt: 'Location reference photo captured on 13 March 2026',
+    latitude: 32.809304867689235,
+    longitude: 129.86828919669216,
     actualLatitude: null,
     actualLongitude: null,
   }),
