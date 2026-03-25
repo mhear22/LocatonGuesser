@@ -2,6 +2,8 @@
 
 Static Vue 3 + Vite site for presenting guessed locations from images. Each entry shows a local image beside a Google Maps embed driven by saved coordinates.
 
+New image entries should default their guessed geo-coordinates to Pripyat, Ukraine: `51.406681, 30.046425`.
+
 ## Requirements
 
 - Node.js 20+ recommended
@@ -38,6 +40,7 @@ No backend, API routes, or environment variables are required.
 1. Put image files in `src/assets/locations/`.
 2. Import the image into `src/data/locations.ts`.
 3. Add a new entry to the exported `locations` array.
+4. Use the Pripyat, Ukraine default guess for new entries unless you already have a better location guess.
 
 Example:
 
@@ -46,11 +49,15 @@ import myImage from '../assets/locations/my-image.jpg'
 
 {
   id: 'my-location',
+  group: 'latest',
   title: 'My Location Guess',
+  filename: 'my-image.jpg',
   image: myImage,
   alt: 'Short accessible description of the image',
-  latitude: 35.6895,
-  longitude: 139.6917,
+  latitude: 51.406681,
+  longitude: 30.046425,
+  actualLatitude: null,
+  actualLongitude: null,
 }
 ```
 
@@ -61,14 +68,20 @@ Each item uses this shape:
 ```ts
 type LocationEntry = {
   id: string
+  group: 'latest' | 'archive'
   title: string
+  filename: string
   image: string
   alt: string
   latitude: number | null
   longitude: number | null
+  actualLatitude: number | null
+  actualLongitude: number | null
 }
 ```
 
-Set both coordinates to `null` if you have not guessed the location yet. The UI will render a placeholder panel instead of a map until both values are filled in.
+`latitude` and `longitude` are the current guessed map location. New entries should start from the Pripyat default unless there is a better guess available.
+
+`actualLatitude` and `actualLongitude` are optional confirmed coordinates used by the CSV export.
 
 The data module validates latitude and longitude values during development and build time so obviously invalid coordinates fail early.

@@ -12,8 +12,15 @@ import image20260312_090025626 from '../assets/locations/IMG_20260312_090025626.
 import image20260312_113501214 from '../assets/locations/IMG_20260312_113501214.jpg'
 import image20260313_105912933 from '../assets/locations/IMG_20260313_105912933.jpg'
 import image20260313_111039650 from '../assets/locations/IMG_20260313_111039650.jpg'
+import image20260313_1110396502 from '../assets/locations/IMG_20260313_1110396502.jpg'
+import image20260315_131856448 from '../assets/locations/IMG_20260315_131856448.jpg'
+import image20260318_101435378 from '../assets/locations/IMG_20260318_101435378.jpg'
+import image20260319_102124560 from '../assets/locations/IMG_20260319_102124560.jpg'
+import image20260319_110848082 from '../assets/locations/IMG_20260319_110848082.jpg'
+import image20260320_105237918 from '../assets/locations/IMG_20260320_105237918.jpg'
 import image20260303 from '../assets/locations/img_20260303_092304864.jpg'
 import image20260311 from '../assets/locations/img_20260311_141506164.jpg'
+import answersCsv from './answers.csv?raw'
 
 export type LocationEntry = {
   id: string
@@ -27,6 +34,16 @@ export type LocationEntry = {
   actualLatitude: number | null
   actualLongitude: number | null
 }
+
+type AnswerEntry = {
+  filename: string
+  indexNumber: number
+  actualLatitude: number | null
+  actualLongitude: number | null
+}
+
+const defaultLatitude = 51.406681
+const defaultLongitude = 30.046425
 
 function assertCoordinateRange(
   label: 'latitude' | 'longitude',
@@ -68,7 +85,102 @@ function defineLocation(entry: LocationEntry): LocationEntry {
   return entry
 }
 
-export const locations: LocationEntry[] = [
+function parseCsvLine(line: string) {
+  const values: string[] = []
+  let currentValue = ''
+  let insideQuotes = false
+
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index]
+    const nextCharacter = line[index + 1]
+
+    if (character === '"') {
+      if (insideQuotes && nextCharacter === '"') {
+        currentValue += '"'
+        index += 1
+      } else {
+        insideQuotes = !insideQuotes
+      }
+
+      continue
+    }
+
+    if (character === ',' && !insideQuotes) {
+      values.push(currentValue.trim())
+      currentValue = ''
+      continue
+    }
+
+    currentValue += character
+  }
+
+  values.push(currentValue.trim())
+  return values
+}
+
+function parseCoordinatePair(value: string) {
+  if (value.length === 0) {
+    return { latitude: null, longitude: null }
+  }
+
+  const [latitudeText, longitudeText] = value.split(',').map((part) => part.trim())
+  const latitude = Number(latitudeText)
+  const longitude = Number(longitudeText)
+
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    throw new Error(`Invalid coordinate pair in answers.csv: "${value}".`)
+  }
+
+  return { latitude, longitude }
+}
+
+function parseAnswersCsv(csvContent: string) {
+  const rows = csvContent
+    .trim()
+    .split(/\r?\n/)
+    .slice(1)
+    .filter((line) => line.trim().length > 0)
+
+  return rows.map((row) => {
+    const [filename, indexNumberText, _guessCoordinates, actualCoordinates] = parseCsvLine(row)
+    const indexNumber = Number(indexNumberText)
+
+    if (!filename || !Number.isInteger(indexNumber) || !actualCoordinates) {
+      throw new Error(`Invalid row in answers.csv: "${row}".`)
+    }
+
+    const { latitude, longitude } = parseCoordinatePair(actualCoordinates)
+
+    return {
+      filename,
+      indexNumber,
+      actualLatitude: latitude,
+      actualLongitude: longitude,
+    } satisfies AnswerEntry
+  })
+}
+
+const answerEntries = parseAnswersCsv(answersCsv)
+const answersByFilename = new Map(answerEntries.map((entry) => [entry.filename, entry]))
+const answersByIndexNumber = new Map(answerEntries.map((entry) => [entry.indexNumber, entry]))
+
+function withActualCoordinates(entry: LocationEntry, indexNumber: number): LocationEntry {
+  const matchingAnswer =
+    answersByFilename.get(entry.filename) ??
+    answersByIndexNumber.get(indexNumber)
+
+  if (!matchingAnswer) {
+    return entry
+  }
+
+  return {
+    ...entry,
+    actualLatitude: matchingAnswer.actualLatitude,
+    actualLongitude: matchingAnswer.actualLongitude,
+  }
+}
+
+const rawLocations: LocationEntry[] = [
   defineLocation({
     id: '2026-03-10-143918-img-20260310-143918094',
     group: 'latest',
@@ -178,6 +290,78 @@ export const locations: LocationEntry[] = [
     actualLongitude: null,
   }),
   defineLocation({
+    id: '2026-03-13-111039-img-20260313-1110396502',
+    group: 'latest',
+    title: '13 Mar 2026, 11:10 am',
+    filename: 'IMG_20260313_1110396502.jpg',
+    image: image20260313_1110396502,
+    alt: 'Location reference photo captured on 13 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-15-131856-img-20260315-131856448',
+    group: 'latest',
+    title: '15 Mar 2026, 1:18 pm',
+    filename: 'IMG_20260315_131856448.jpg',
+    image: image20260315_131856448,
+    alt: 'Location reference photo captured on 15 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-18-101435-img-20260318-101435378',
+    group: 'latest',
+    title: '18 Mar 2026, 10:14 am',
+    filename: 'IMG_20260318_101435378.jpg',
+    image: image20260318_101435378,
+    alt: 'Location reference photo captured on 18 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-19-102124-img-20260319-102124560',
+    group: 'latest',
+    title: '19 Mar 2026, 10:21 am',
+    filename: 'IMG_20260319_102124560.jpg',
+    image: image20260319_102124560,
+    alt: 'Location reference photo captured on 19 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-19-110848-img-20260319-110848082',
+    group: 'latest',
+    title: '19 Mar 2026, 11:08 am',
+    filename: 'IMG_20260319_110848082.jpg',
+    image: image20260319_110848082,
+    alt: 'Location reference photo captured on 19 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
+    id: '2026-03-20-105237-img-20260320-105237918',
+    group: 'latest',
+    title: '20 Mar 2026, 10:52 am',
+    filename: 'IMG_20260320_105237918.jpg',
+    image: image20260320_105237918,
+    alt: 'Location reference photo captured on 20 March 2026',
+    latitude: defaultLatitude,
+    longitude: defaultLongitude,
+    actualLatitude: null,
+    actualLongitude: null,
+  }),
+  defineLocation({
     id: '2026-03-11-162203-1000017978',
     group: 'archive',
     title: '11 Mar 2026, 4:22 pm',
@@ -262,3 +446,7 @@ export const locations: LocationEntry[] = [
     actualLongitude: null,
   }),
 ]
+
+export const locations: LocationEntry[] = rawLocations.map((entry, index) =>
+  defineLocation(withActualCoordinates(entry, index + 1)),
+)

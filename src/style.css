@@ -271,8 +271,41 @@ select {
   font-size: 0.95rem;
 }
 
+.actual-coordinates {
+  margin: 0.35rem 0 0;
+  color: var(--copy-muted);
+  font-size: 0.9rem;
+}
+
 .pending-copy {
   color: var(--accent);
+}
+
+.distance-chip {
+  display: inline-flex;
+  align-items: center;
+  margin: 0.85rem 0 0;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  color: var(--hero-title);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.distance-chip-success {
+  border: 1px solid rgba(88, 197, 126, 0.42);
+  background: rgba(88, 197, 126, 0.18);
+}
+
+.distance-chip-warning {
+  border: 1px solid rgba(240, 179, 92, 0.42);
+  background: rgba(240, 179, 92, 0.18);
+}
+
+.distance-chip-danger {
+  border: 1px solid rgba(232, 93, 93, 0.42);
+  background: rgba(232, 93, 93, 0.2);
 }
 
 .map-frame {
